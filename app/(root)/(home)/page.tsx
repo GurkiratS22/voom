@@ -1,10 +1,21 @@
+'use client'
+
 import MeetingTypeList from '@/components/MeetingTypeList';
+import React, { useState, useEffect } from 'react';
 
 const Home = () => {
-  const now = new Date();
-
-  const time = now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' });
-  const date = (new Intl.DateTimeFormat('en-CA', { dateStyle: 'full' })).format(now);
+    const [time, setTime] = useState(new Date());
+  
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setTime(new Date());
+      }, 1000); // Update every minute
+  
+      return () => clearInterval(intervalId); // Cleanup on unmount
+    }, []); // Run effect only once on mount
+  
+    const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formattedDate = time.toLocaleDateString(undefined, { dateStyle: 'full' });
 
   return (
     <section className="flex size-full flex-col gap-5 text-white">
@@ -14,8 +25,8 @@ const Home = () => {
             Upcoming Meeting at: 12:30 PM
           </h2> */}
           <div className="flex flex-col gap-2">
-            <h1 className="text-4xl font-extrabold lg:text-7xl mt-1 ml-1">{time}</h1>
-            <p className="text-lg font-medium text-sky-1 lg:text-2xl ml-1">{date}</p>
+            <h1 className="text-4xl font-extrabold lg:text-7xl mt-1 ml-1">{formattedTime}</h1>
+            <p className="text-lg font-medium text-sky-1 lg:text-2xl ml-1">{formattedDate}</p>
           </div>
         </div>
       </div>
