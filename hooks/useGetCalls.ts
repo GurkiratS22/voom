@@ -44,8 +44,8 @@ export const useGetCalls = () => {
     return (startsAt && new Date(startsAt) < now) || !!endedAt
   })
 
-  const upcomingCalls = calls?.filter(({ state: { startsAt } }: Call) => {
-    return startsAt && new Date(startsAt) > now
+  const upcomingCalls = calls?.filter(({ state: { startsAt, participantCount } }: Call) => {
+    return (startsAt && new Date(startsAt) > now) && (participantCount == 0)
   })
 
   return { endedCalls, upcomingCalls, callRecordings: calls, isLoading }

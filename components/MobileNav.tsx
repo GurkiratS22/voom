@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
 
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';

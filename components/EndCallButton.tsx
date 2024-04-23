@@ -31,7 +31,7 @@ const EndCallButton = () => {
   };
 
   return (
-    <Button onClick={endCall} className="bg-red-500">
+    <Button onClick={endCall} className="bg-red-500 lg:hover:scale-105 transition-all">
       End call for everyone
     </Button>
   );

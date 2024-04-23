@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { usePathname } from 'next/navigation';
 
 import { sidebarLinks } from '@/constants';
@@ -20,7 +20,7 @@ const Sidebar = () => {
               href={item.route}
               key={item.label}
               className={cn(
-                'flex gap-4 items-center p-4 rounded-lg justify-start',
+                'flex gap-4 items-center p-4 rounded-lg justify-start lg:hover:scale-110 transition-all',
                 {
                   'bg-blue-1': isActive,
                 }

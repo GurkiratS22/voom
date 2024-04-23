@@ -60,7 +60,7 @@ const MeetingCard = ({
         </div>
         {!isPreviousMeeting && (
           <div className="flex gap-2">
-            <Button onClick={handleClick} className="rounded bg-blue-1 px-6">
+            <Button onClick={handleClick} className="rounded bg-blue-1 px-6 lg:hover:scale-105 transition-all">
               {buttonIcon1 && (
                 <Image src={buttonIcon1} alt="feature" width={20} height={20} />
               )}
@@ -73,7 +73,7 @@ const MeetingCard = ({
                   title: "Link Copied",
                 });
               }}
-              className="bg-dark-4 px-6"
+              className="bg-dark-4 px-6 lg:hover:scale-105 transition-all"
             >
               <Image
                 src="/icons/copy.svg"
