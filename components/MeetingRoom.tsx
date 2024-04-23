@@ -21,6 +21,9 @@ import {
 } from './ui/dropdown-menu';
 import Loader from './Loader';
 import EndCallButton from './EndCallButton';
+import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
+import Image from "next/image";
 import { cn } from '@/lib/utils';
 
 type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
@@ -35,6 +38,7 @@ const MeetingRoom = () => {
 
   // for more detail about types of CallingState see: https://getstream.io/video/docs/react/ui-cookbook/ringing-call/#incoming-call-panel
   const callingState = useCallCallingState();
+  const { toast } = useToast();
 
   if (callingState !== CallingState.JOINED) return <Loader />;
 
@@ -47,6 +51,14 @@ const MeetingRoom = () => {
       default:
         return <SpeakerLayout participantsBarPosition="right" />;
     }
+  };
+
+  const copyLinkToClipboard = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
+    toast({
+      title: "Link Copied",
+    });
   };
 
   return (
@@ -66,6 +78,18 @@ const MeetingRoom = () => {
       {/* video layout and call controls */}
       <div className="fixed bottom-1 flex flex-wrap w-full items-center justify-center gap-5 max-sm:max-w-sm">
         <CallControls onLeave={() => router.push(`/`)} />
+        <Button
+          onClick={copyLinkToClipboard}
+          className="cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]"
+        >
+              <Image
+                src="/icons/copy.svg"
+                alt="feature"
+                width={20}
+                height={20}
+              />
+              &nbsp; Copy Link
+            </Button>
 
         <DropdownMenu>
           <div className="flex items-center">
